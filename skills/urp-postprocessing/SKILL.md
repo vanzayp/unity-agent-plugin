@@ -1,6 +1,6 @@
 ---
 name: urp-postprocessing
-description: Sets up, configures, and debugs URP post-processing effects using the Volume framework. Use when the user asks about bloom, tonemapping, color adjustments, depth of field, vignette, motion blur, or other Volume overrides in a URP project.
+description: Sets up, configures, and debugs URP post-processing with the Volume framework. Use for bloom, tonemapping, color adjustments, depth of field, vignette, or other Volume overrides.
 required_packages:
   com.unity.render-pipelines.universal: ">=14.0.0"
 ---
@@ -23,7 +23,7 @@ missing, say so and stop.
 
 Run C# through the connected Editor with the `eval` command. Discover its parameter shape
 from `unity command --format json` rather than assuming one — the inline form is
-`unity command eval --code '<snippet>'`, and some Pipeline versions also register
+`unity command eval --caller plugin --skill urp-postprocessing --code '<snippet>'`, and some Pipeline versions also register
 `eval_file` for running a snippet from a file. **Check the catalog before reaching for
 `eval_file`; it is frequently absent.** `unity command` defaults to a 30 second timeout.
 

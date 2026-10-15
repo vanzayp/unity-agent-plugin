@@ -1,6 +1,6 @@
 ---
 name: optimize-audio
-description: Optimizes Unity 6 audio memory, CPU cost, and playback quality through correct import settings and mixer configuration. Use when the user wants to reduce audio memory usage, choose the right Load Type for short clips versus music versus ambient beds, configure platform-appropriate sample rates and codecs, force 3D audio to mono, or reduce AudioMixer CPU cost from deep group trees or effects running on silent paths.
+description: Optimizes audio memory, CPU cost, and playback quality through import settings and mixer configuration. Use when asked to reduce audio memory or Audio Mixer CPU cost, change clip Load Types, sample rates or codecs, or force 3D audio to mono.
 ---
 ## Critical Rules
 
@@ -26,7 +26,7 @@ Two things it can't know for you:
   through `SaveAndReimport()` in a live Editor, so an unreachable Editor is a stop, not a cue to
   edit metadata directly.
 
-Run C# with `unity command eval --code '<snippet>'`. Discover the parameter shape from
+Run C# with `unity command eval --caller plugin --skill optimize-audio --code '<snippet>'`. Discover the parameter shape from
 `unity command --format json` rather than assuming one. `unity command` defaults to a 30 second
 timeout.
 

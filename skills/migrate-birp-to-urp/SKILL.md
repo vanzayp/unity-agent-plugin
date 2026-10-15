@@ -1,6 +1,6 @@
 ---
 name: migrate-birp-to-urp
-description: Plans, executes, and troubleshoots Unity projects moving from the Built-in Render Pipeline (BiRP/BIRP/Built-in RP) to the Universal Render Pipeline (URP). Use when the user asks to upgrade, convert, switch, or migrate a project, scene, material, or shader to URP/Universal Render Pipeline; fix pink or magenta materials after URP; convert Built-in materials/shaders; move a 2D project to URP 2D; review lighting, quality, post-processing, baked lightmaps, or reflection probes after URP; or diagnose visual problems after a render-pipeline migration.
+description: Plans, executes, and troubleshoots migration from the Built-in Render Pipeline to URP. Use when asked to convert a project, scene, material, or shader to URP, or to fix visuals broken by the change.
 ---
 Classify the request, inspect the current project state, choose the correct migration path, and validate the Built-in to URP migration outcome carefully.
 
@@ -111,7 +111,7 @@ Two things it can't know for you:
   materials, and rebaking lighting all need a live Editor. An unreachable Editor is a stop, not a
   cue to hand-edit `ProjectSettings/GraphicsSettings.asset`.
 
-Run C# with `unity command eval --code '<snippet>'`. `unity command` defaults to a 30 second
+Run C# with `unity command eval --caller plugin --skill migrate-birp-to-urp --code '<snippet>'`. `unity command` defaults to a 30 second
 timeout, which matters here: installing URP triggers a package refresh and domain reload that will
 outlast it. Treat that as a phase boundary rather than raising the timeout.
 

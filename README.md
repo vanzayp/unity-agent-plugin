@@ -38,12 +38,12 @@ codex plugin add unity@unity-agent-plugin
 
 **Grok**
 
+In Grok Build, open `/marketplace`, search for Unity, and press `i`. Or install from a
+terminal:
+
 ```bash
 grok plugin install Unity-Technologies/unity-agent-plugin --trust
 ```
-
-Grok asks for explicit trust before it installs anything from a repository. This
-plugin ships skills only — no hooks and no MCP servers.
 
 ### Verify it worked
 
@@ -56,26 +56,42 @@ also shows `unity` as installed and enabled.
 
 ```
 PLUGIN                    STATUS              VERSION
-unity@unity-agent-plugin  installed, enabled  0.1.0-beta
+unity@unity-agent-plugin  installed, enabled  0.1.8-beta
 ```
 
-**Grok** — type `/` and the skills appear in the slash menu. Grok uses the plain skill
+**Grok**: type `/` and the skills appear in the slash menu. Grok uses the plain skill
 name, and switches to the plugin-qualified form (`/unity:ui-uitk`) when another
 installed skill shares the same name. `grok plugin list` shows `unity`, and
 `grok plugin details unity` lists what it provides.
 
 ### Manual install
 
-If you can't use the marketplace commands, clone the repo and link it into your personal skills directory instead:
+If you can't use the marketplace commands, clone the repo and link each skill into your personal skills directory. Run this from the folder you want the clone in:
 
 ```bash
 git clone https://github.com/Unity-Technologies/unity-agent-plugin.git
-ln -s "$(pwd)/unity-agent-plugin" ~/.claude/skills/unity
+cd unity-agent-plugin
 ```
 
-It loads automatically in every project from your next session onward.
+**Claude Code**
+
+```bash
+mkdir -p ~/.claude/skills
+for d in "$PWD"/skills/*; do ln -sfn "$d" ~/.claude/skills/"$(basename "$d")"; done
+```
+
+**Codex**
+
+```bash
+mkdir -p ~/.agents/skills
+for d in "$PWD"/skills/*; do ln -sfn "$d" ~/.agents/skills/"$(basename "$d")"; done
+```
+
+The skills load in every project from your next session onward. To update them, run `git pull` in the clone. Skills installed this way don't appear under a `unity:` prefix, because they aren't installed as a plugin.
 
 ## Usage
+
+> **Before you start:** the skills have your agent change your project directly. It edits scripts, scenes and assets, and when the Unity CLI is available it runs C# in your open Editor. Not every change is logged or can be undone from the Editor, so keep your project under version control and commit before asking for larger changes.
 
 Once installed, your agent uses the relevant skill automatically when you ask it to
 do something in your Unity project. For example:
@@ -96,6 +112,18 @@ do something in your Unity project. For example:
 
 In Claude Code and Grok the skills also appear in the slash menu, so you can pick one
 explicitly instead of describing the task.
+
+For what each skill covers and how to prompt it, see
+[About Unity's plugin](https://docs.unity.com/en-us/ai/unity-plugin/about-unity-plugin),
+or browse the [skills folder](skills/).
+
+## Works best with the Unity CLI
+
+Many skills drive your open Unity Editor directly: they create GameObjects, change import settings, run C# in the Editor, and check the result, instead of hand-editing scene and asset files. They do this through the [Unity CLI](https://docs.unity.com/en-us/unity-cli), Unity's command-line tool, which also installs Editors, creates and opens projects, and runs builds and tests.
+
+You don't have to set it up yourself. When a task needs the CLI, your agent checks whether it's installed and can install it for you, along with the small Unity package the CLI uses to talk to your open Editor. If you use the Unity Hub, you likely have the CLI already: the Hub now installs it automatically.
+
+To install it yourself, or to use it on its own from your terminal, see [Use the Unity CLI](https://docs.unity.com/en-us/unity-cli/use-unity-cli).
 
 ## Works with
 

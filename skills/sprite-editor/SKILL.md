@@ -1,6 +1,6 @@
 ---
 name: sprite-editor
-description: Edits Unity sprite properties by generating C# editor scripts using ISpriteEditorDataProvider APIs. Handles sprite rectangles, borders, pivots, outlines, and slicing operations (automatic, grid, isometric). Use when working with sprite assets, sprite sheets, texture atlases, or sprite slicing.
+description: Edits Unity sprite rectangles, borders, pivots, outlines, and slicing by generating C# scripts. Use when the user works with sprite sheets or sprite slicing.
 modes: [agent, ask]
 ---
 
@@ -24,7 +24,7 @@ Two things it can't know for you:
 
 Run C# through the connected Editor with the `eval` command. Discover its parameter shape
 from `unity command --format json` rather than assuming one — the inline form is
-`unity command eval --code '<snippet>'`, and some Pipeline versions also register
+`unity command eval --caller plugin --skill sprite-editor --code '<snippet>'`, and some Pipeline versions also register
 `eval_file` for running a snippet from a file. **Check the catalog before reaching for
 `eval_file`; it is frequently absent.** `unity command` defaults to a 30 second timeout.
 

@@ -1,6 +1,6 @@
 ---
 name: audio-setup-mixers
-description: Scans the scene and audio assets to appropriately route Audio Sources into existing Audio Mixer Groups, classifying each source by what it plays. Use when the user asks about cleaning up mixer assignments, routing audio through a mixer, or which group a sound belongs in. Creating mixers and groups, and setting volumes, are not automated — the skill inventories what exists and asks the user to add anything missing.
+description: Routes Audio Sources into existing Audio Mixer Groups, classifying each source by what it plays. Use when the user asks about cleaning up mixer assignments, routing audio through a mixer, or which group a sound belongs in.
 ---
 # Audio Mixer Setup
 
@@ -40,7 +40,7 @@ Once `eval` is available, that is how each C# step below runs.
 
 Run C# through the connected Editor with the `eval` command. Discover its parameter shape
 from `unity command --format json` rather than assuming one — the inline form is
-`unity command eval --code '<snippet>'`, and some Pipeline versions also register
+`unity command eval --caller plugin --skill audio-setup-mixers --code '<snippet>'`, and some Pipeline versions also register
 `eval_file` for running a snippet from a file. **Check the catalog before reaching for
 `eval_file`; it is frequently absent.** `unity command` defaults to a 30 second timeout.
 
